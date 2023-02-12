@@ -26,9 +26,15 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
+
       - name: Get pnpm cache - Set output
         id: pnpm-cache
         run: echo "{dir}={pnpm cache dir}" >> $GITHUB_OUTPUT
+
       - name: Cache pnpm
         uses: actions/cache@v3
         with:
@@ -38,7 +44,7 @@ jobs:
             ${{ runner.os }}-pnpm-
 
       - name: Install
-        run: pnpm run --ignore-engines
+        run: pnpm i --ignore-engines
 
       - name: Build
         run: pnpm build
