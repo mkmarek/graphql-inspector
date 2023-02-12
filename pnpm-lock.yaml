@@ -88,11 +88,10 @@ importers:
       '@actions/github': 4.0.0
       '@graphql-inspector/core': link:../core
       '@graphql-inspector/github': link:../github
+      '@types/js-yaml': 4.0.5
       js-yaml: 4.1.0
       probot: 11.4.1
       tslib: 2.5.0
-    devDependencies:
-      '@types/js-yaml': 4.0.5
     publishDirectory: dist
 
   packages/ci:
