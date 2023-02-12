@@ -44,7 +44,7 @@ jobs:
             ${{ runner.os }}-pnpm-
 
       - name: Install
-        run: pnpm --ignore-engines
+        run: npx pnpm install --ignore-engines
 
       - name: Build
         run: pnpm build
