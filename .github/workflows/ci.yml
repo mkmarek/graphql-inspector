@@ -28,7 +28,7 @@ jobs:
 
       - name: Get pnpm cache
         id: pnpm-cache
-        run: echo "dir=$(pnpm cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(pnpm install cache dir)" >> $GITHUB_OUTPUT
       - name: Cache pnpm
         uses: actions/cache@v3
         with:
