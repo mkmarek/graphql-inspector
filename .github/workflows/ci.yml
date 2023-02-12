@@ -26,15 +26,13 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
 
-      - name: Install pnpm
-        run: npm install -g pnpm
-      - name: Get pnpm cache
+      - name: Get pnpm cache - Set output
         id: pnpm-cache
-        run: echo "dir=$(pnpm cache dir)" >> $GITHUB_OUTPUT
+        run: echo "{dir}={pnpm cache dir}" >> $GITHUB_OUTPUT
       - name: Cache pnpm
         uses: actions/cache@v3
         with:
-          path: ${{ dir }}
+          path: ${{ steps.pnpm-cache.outputs.dir }}
           key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
