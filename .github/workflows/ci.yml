@@ -28,7 +28,7 @@ jobs:
 
       - name: Get pnpm cache
         id: pnpm-cache
-        run: echo "::set-output name=dir::$(pnpm install cache dir)"
+        run: echo "::set-output name=dir::$(pnpm cache dir)"
       - name: Cache pnpm
         uses: actions/cache@v3
         with:
