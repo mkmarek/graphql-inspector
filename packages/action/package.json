@@ -45,8 +45,8 @@
     "build": "tsc",
     "clean": "rm -rf dist/",
     "deploy": "now --docker",
-    "prebuild": "yarn clean",
-    "prepublishOnly": "yarn build",
+    "prebuild": "pnpm clean",
+    "prepublishOnly": "pnpm build",
     "prepack": "bob prepack"
   },
   "dependencies": {
