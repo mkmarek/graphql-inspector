@@ -26,6 +26,8 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
 
+      - name: Install pnpm
+        run: npm install -g pnpm
       - name: Get pnpm cache
         id: pnpm-cache
         run: echo "dir=$(pnpm cache dir)" >> $GITHUB_OUTPUT
