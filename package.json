@@ -11,12 +11,6 @@
   },
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "packages/commands/*",
-    "packages/loaders/*",
-    "website"
-  ],
   "keywords": [
     "graphql",
     "graphql-inspector",
