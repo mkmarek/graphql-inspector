@@ -28,7 +28,7 @@ jobs:
 
       - name: Get pnpm cache
         id: pnpm-cache
-        run: echo "::set-output name=dir::$(pnpm cache dir)"
+        run: echo "::set-output name=dir::$(pnpm install cache dir)"
       - name: Cache pnpm
         uses: actions/cache@v3
         with:
@@ -38,7 +38,7 @@ jobs:
             ${{ runner.os }}-pnpm-
 
       - name: Install
-        run: pnpm --ignore-engines
+        run: pnpm install --ignore-engines
 
       - name: Build
         run: pnpm build
