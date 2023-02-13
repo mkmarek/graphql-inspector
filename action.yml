@@ -10,6 +10,9 @@ inputs:
       The name of the check ("GraphQL Inspector" by default).
       In case of multiple GraphQL Inspector Actions, use `name` to prevent GitHub from overwriting results.
       For example, "Check Public API" and "Check Internal API".
+  aws:
+    description: |
+      If the action should include AWS appsync types
   annotations:
     description: Use annotation (enabled by default)
   fail-on-breaking:

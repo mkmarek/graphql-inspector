@@ -71,6 +71,7 @@ export async function run() {
   }
 
   const useMerge = castToBoolean(core.getInput('experimental_merge'), true);
+  const useAws = castToBoolean(core.getInput('aws'));
   const useAnnotations = castToBoolean(core.getInput('annotations'));
   const failOnBreaking = castToBoolean(core.getInput('fail-on-breaking'));
   const endpoint: string = core.getInput('endpoint');
@@ -168,8 +169,64 @@ export async function run() {
     };
   } else {
     sources = {
-      old: new Source(oldFile, endpoint || `${schemaRef}:${schemaPath}`),
-      new: new Source(newFile, schemaPath),
+      old: new Source(`
+      scalar AWSDate
+      scalar AWSTime
+      scalar AWSDateTime
+      scalar AWSTimestamp
+      scalar AWSEmail
+      scalar AWSJSON
+      scalar AWSURL
+      scalar AWSPhone
+      scalar AWSIPAddress
+      scalar BigInt
+      scalar Double
+
+      directive @aws_subscribe(mutations: [String!]!) on FIELD_DEFINITION
+
+      directive @deprecated(
+        reason: String
+      ) on FIELD_DEFINITION | INPUT_FIELD_DEFINITION | ENUM | ENUM_VALUE
+
+      directive @aws_auth(cognito_groups: [String!]!) on FIELD_DEFINITION
+      directive @aws_api_key on FIELD_DEFINITION | OBJECT
+      directive @aws_iam on FIELD_DEFINITION | OBJECT
+      directive @aws_oidc on FIELD_DEFINITION | OBJECT
+      directive @aws_cognito_user_pools(
+        cognito_groups: [String!]
+      ) on FIELD_DEFINITION | OBJECT
+      directive @aws_lambda on FIELD_DEFINITION | OBJECT
+        ${oldFile}
+      `, endpoint || `${schemaRef}:${schemaPath}`),
+      new: new Source(`
+      scalar AWSDate
+      scalar AWSTime
+      scalar AWSDateTime
+      scalar AWSTimestamp
+      scalar AWSEmail
+      scalar AWSJSON
+      scalar AWSURL
+      scalar AWSPhone
+      scalar AWSIPAddress
+      scalar BigInt
+      scalar Double
+
+      directive @aws_subscribe(mutations: [String!]!) on FIELD_DEFINITION
+
+      directive @deprecated(
+        reason: String
+      ) on FIELD_DEFINITION | INPUT_FIELD_DEFINITION | ENUM | ENUM_VALUE
+
+      directive @aws_auth(cognito_groups: [String!]!) on FIELD_DEFINITION
+      directive @aws_api_key on FIELD_DEFINITION | OBJECT
+      directive @aws_iam on FIELD_DEFINITION | OBJECT
+      directive @aws_oidc on FIELD_DEFINITION | OBJECT
+      directive @aws_cognito_user_pools(
+        cognito_groups: [String!]
+      ) on FIELD_DEFINITION | OBJECT
+      directive @aws_lambda on FIELD_DEFINITION | OBJECT
+        ${newFile}
+      `, schemaPath),
     };
 
     oldSchema = produceSchema(sources.old);
